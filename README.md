@@ -1,8 +1,8 @@
 # 🔴⚫ Check-in Rubro-Negro
 
-> O ingresso virou QR Code e a gente perdeu aquele pedacinho de papel que ficava guardado na gaveta. Este projeto nasceu de uma vontade: devolver a memória de **“eu estava lá”**.
+> A biometria facial tornou a entrada no estádio mais prática, mas bate aquela saudade de guardar o ingresso como lembrança. Este projeto nasceu de uma vontade: devolver ao torcedor a memória de **“eu estava lá”**.
 
-O **Check-in Rubro-Negro** é um projeto independente desenvolvido por um torcedor que está aprendendo Java e quer transformar uma ideia em um sistema real. A proposta é criar uma espécie de álbum digital das arquibancadas, onde cada jogo assistido se transforma em uma lembrança.
+O **Check-in Rubro-Negro** é um projeto independente desenvolvido por um torcedor que está aprendendo Java e quer transformar uma ideia em um sistema real. A proposta não é substituir a biometria ou o controle oficial de acesso, mas criar uma lembrança digital das partidas frequentadas pelo torcedor.
 
 O objetivo também é usar o desenvolvimento do projeto para praticar programação, construir um portfólio e evoluir meus conhecimentos em **Java e desenvolvimento backend**.
 
