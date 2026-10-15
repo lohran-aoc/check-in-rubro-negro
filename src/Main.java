@@ -4,10 +4,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner leitura = new Scanner(System.in);
         int opcao;
-        String adversario = "Estudiantes";
-        String data = "15/10/2026";
-        String hora = "21:30";
-        String estadio = "Estádio UNO";
+        Jogo proximoJogo = new Jogo("Estudiantes", "15/10/2026", "21:30", "UNO");
         int checkIns = 0;
         boolean fezCheckIn = false;
 
@@ -24,7 +21,7 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    System.out.println("O próximo jogo do Mengão é " + data + " às " + hora + " contra o " + adversario + " no " + estadio);
+                    proximoJogo.exibeInformacoes();
                     break;
                 case 2:
                     System.out.println("Fazendo check-in");
@@ -38,7 +35,10 @@ public class Main {
                     System.out.println("Você já fez " + checkIns + " check-ins.");
                     break;
                 case 3:
-                    System.out.println("Visualizando perfil");
+                    System.out.println("========== PERFIL RUBRO-NEGRO ==========");
+                    System.out.println("Total de check-ins: " + checkIns);
+                    System.out.println("Próximo adversário: " + proximoJogo.getAdversario());
+                    System.out.println("Data da partida: " + proximoJogo.getData());
                     break;
                 case 4:
                     System.out.println("Até a próxima!");
