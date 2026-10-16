@@ -27,7 +27,7 @@ public class Jogo {
         this.estadio = estadio;
     }
 
-    public void exibeInformacoes() {
+    public void exibirInformacoes() {
         System.out.println("O próximo jogo do Mengão é " + data + " às " + hora + " contra o " + adversario + " no " + estadio);
     }
 }

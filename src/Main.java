@@ -1,3 +1,4 @@
+import java.time.LocalDate;
 import java.util.Scanner;
 
 public class Main {
@@ -5,6 +6,8 @@ public class Main {
         Scanner leitura = new Scanner(System.in);
         int opcao;
         Jogo proximoJogo = new Jogo("Estudiantes", "15/10/2026", "21:30", "UNO");
+        Usuario usuarioAtual = new Usuario(1, "Nicolas", LocalDate.of(2019, 10, 19), false);
+        Presenca presencaAtual = null;
         int checkIns = 0;
         boolean fezCheckIn = false;
 
@@ -21,14 +24,14 @@ public class Main {
 
             switch (opcao) {
                 case 1:
-                    proximoJogo.exibeInformacoes();
+                    proximoJogo.exibirInformacoes();
                     break;
                 case 2:
                     System.out.println("Fazendo check-in");
-                    if (fezCheckIn == false) {
+                    if (presencaAtual == null) {
                         checkIns++;
+                        presencaAtual = new Presenca(usuarioAtual, proximoJogo);
                         System.out.println("Você fez o check-in.");
-                        fezCheckIn = true;
                     } else {
                         System.out.println("Você já fez o check-in para essa partida!");
                     }
@@ -36,6 +39,12 @@ public class Main {
                     break;
                 case 3:
                     System.out.println("========== PERFIL RUBRO-NEGRO ==========");
+                    System.out.println("Bem-vindo " + usuarioAtual.getNome());
+                    if(usuarioAtual.isSocioTorcedor()) {
+                        System.out.println("Você é sócio torcedor!");
+                    } else {
+                        System.out.println("Que tal aderir a um plano de sócio-torcedor?");
+                    }
                     System.out.println("Total de check-ins: " + checkIns);
                     System.out.println("Próximo adversário: " + proximoJogo.getAdversario());
                     System.out.println("Data da partida: " + proximoJogo.getData());
