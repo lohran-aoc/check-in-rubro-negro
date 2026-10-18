@@ -14,7 +14,6 @@ public class Main {
         do {
             System.out.println("======Bem-vindo ao Check-in Rubro-Negro======");
             System.out.println(" ");
-            System.out.println(" ");
             System.out.println("Escolha uma opção:");
             System.out.println("1. Consultar jogo");
             System.out.println("2. Fazer check-in");
@@ -35,7 +34,7 @@ public class Main {
                     } else {
                         System.out.println("Você já fez o check-in para essa partida!");
                     }
-                    System.out.println("Você já fez " + checkIns + " check-ins.");
+                    System.out.println("Você já fez " + checkIns + " check-in(s).");
                     break;
                 case 3:
                     System.out.println("========== PERFIL RUBRO-NEGRO ==========");
@@ -46,8 +45,16 @@ public class Main {
                         System.out.println("Que tal aderir a um plano de sócio-torcedor?");
                     }
                     System.out.println("Total de check-ins: " + checkIns);
-                    System.out.println("Próximo adversário: " + proximoJogo.getAdversario());
-                    System.out.println("Data da partida: " + proximoJogo.getData());
+                    System.out.println(" ");
+                    if (presencaAtual != null) {
+                        System.out.println("=========== ÚLTIMA PRESENÇA ===========");
+                        System.out.println("Torcedor: " + presencaAtual.getUsuario().getNome());
+                        System.out.println("Adversário: " + presencaAtual.getJogo().getAdversario());
+                        System.out.println("Data: " + presencaAtual.getJogo().getData());
+                        System.out.println("Hora: " + presencaAtual.getJogo().getHora());
+                    } else {
+                        System.out.println("Faça seu check-in para o próximo jogo contra o " + proximoJogo.getAdversario() + " no dia: " + proximoJogo.getData());
+                    }
                     break;
                 case 4:
                     System.out.println("Até a próxima!");
