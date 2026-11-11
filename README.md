@@ -82,7 +82,7 @@ Essa estrutura é uma proposta inicial e poderá evoluir à medida que novas fun
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/SEU-USUARIO/SEU-REPOSITORIO.git
+   git clone https://github.com/lohran-aoc/check-in-rubro-negro
    ```
 
 2. Abra o projeto na IDE.
