@@ -1,4 +1,6 @@
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -8,6 +10,7 @@ public class Main {
         Jogo proximoJogo = new Jogo("Estudiantes", "15/10/2026", "21:30", "UNO");
         Usuario usuarioAtual = new Usuario(1, "Nicolas", LocalDate.of(2019, 10, 19), false);
         Presenca presencaAtual = null;
+        List<Presenca> listaPresencas = new ArrayList<>();
         int checkIns = 0;
         boolean fezCheckIn = false;
 
@@ -27,9 +30,17 @@ public class Main {
                     break;
                 case 2:
                     System.out.println("Fazendo check-in");
-                    if (presencaAtual == null) {
+                    boolean jaFezCheckIn = false;
+                    for (Presenca presenca : listaPresencas) {
+                        if (presenca.getJogo().getAdversario().equals(proximoJogo.getAdversario()) && presenca.getJogo().getData().equals(proximoJogo.getData())) {
+                            jaFezCheckIn = true;
+                            break;
+                        }
+                    }
+                    if (!jaFezCheckIn) {
                         checkIns++;
                         presencaAtual = new Presenca(usuarioAtual, proximoJogo);
+                        listaPresencas.add(presencaAtual);
                         System.out.println("Você fez o check-in.");
                     } else {
                         System.out.println("Você já fez o check-in para essa partida!");
@@ -46,14 +57,15 @@ public class Main {
                     }
                     System.out.println("Total de check-ins: " + checkIns);
                     System.out.println(" ");
-                    if (presencaAtual != null) {
-                        System.out.println("=========== ÚLTIMA PRESENÇA ===========");
-                        System.out.println("Torcedor: " + presencaAtual.getUsuario().getNome());
-                        System.out.println("Adversário: " + presencaAtual.getJogo().getAdversario());
-                        System.out.println("Data: " + presencaAtual.getJogo().getData());
-                        System.out.println("Hora: " + presencaAtual.getJogo().getHora());
+                    if (!listaPresencas.isEmpty()) {
+                        for (Presenca presenca : listaPresencas) {
+                            System.out.println("Adversário: " + presenca.getJogo().getAdversario());
+                            System.out.println("Data: " + presenca.getJogo().getData());
+                            System.out.println("Hora: " + presenca.getJogo().getHora());
+                            System.out.println("----------------------------");
+                        }
                     } else {
-                        System.out.println("Faça seu check-in para o próximo jogo contra o " + proximoJogo.getAdversario() + " no dia: " + proximoJogo.getData());
+                        System.out.println("Você ainda não fez nenhum check-in");
                     }
                     break;
                 case 4:
