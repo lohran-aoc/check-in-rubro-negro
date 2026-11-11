@@ -7,7 +7,9 @@ public class Main {
     public static void main(String[] args) {
         Scanner leitura = new Scanner(System.in);
         int opcao;
+        int opcaoJogo;
         Jogo proximoJogo = new Jogo("Estudiantes", "15/10/2026", "21:30", "UNO");
+        Jogo segundoJogo = new Jogo("Vasco", "11/11/2026", "21:30", "Maracanã");
         Usuario usuarioAtual = new Usuario(1, "Nicolas", LocalDate.of(2019, 10, 19), false);
         Presenca presencaAtual = null;
         List<Presenca> listaPresencas = new ArrayList<>();
@@ -29,17 +31,36 @@ public class Main {
                     proximoJogo.exibirInformacoes();
                     break;
                 case 2:
-                    System.out.println("Fazendo check-in");
+                    Jogo jogoSelecionado = null;
+                    System.out.println("Em qual jogo você quer fazer check-in?");
+                    System.out.println("1: " + proximoJogo.getAdversario());
+                    System.out.println("2: " + segundoJogo.getAdversario());
+                    opcaoJogo = leitura.nextInt();
+
+                    switch (opcaoJogo) {
+                        case 1:
+                            jogoSelecionado = proximoJogo;
+                            break;
+                        case 2:
+                            jogoSelecionado = segundoJogo;
+                            break;
+                        default:
+                            System.out.println("Opção de jogo inválida!");
+                            break;
+                    }
+                    if (jogoSelecionado == null) {
+                        break;
+                    }
                     boolean jaFezCheckIn = false;
                     for (Presenca presenca : listaPresencas) {
-                        if (presenca.getJogo().getAdversario().equals(proximoJogo.getAdversario()) && presenca.getJogo().getData().equals(proximoJogo.getData())) {
+                        if (presenca.getJogo().getAdversario().equals(jogoSelecionado.getAdversario()) && presenca.getJogo().getData().equals(jogoSelecionado.getData())) {
                             jaFezCheckIn = true;
                             break;
                         }
                     }
                     if (!jaFezCheckIn) {
                         checkIns++;
-                        presencaAtual = new Presenca(usuarioAtual, proximoJogo);
+                        presencaAtual = new Presenca(usuarioAtual, jogoSelecionado);
                         listaPresencas.add(presencaAtual);
                         System.out.println("Você fez o check-in.");
                     } else {
@@ -58,6 +79,7 @@ public class Main {
                     System.out.println("Total de check-ins: " + checkIns);
                     System.out.println(" ");
                     if (!listaPresencas.isEmpty()) {
+                        System.out.println("----------------------------");
                         for (Presenca presenca : listaPresencas) {
                             System.out.println("Adversário: " + presenca.getJogo().getAdversario());
                             System.out.println("Data: " + presenca.getJogo().getData());
