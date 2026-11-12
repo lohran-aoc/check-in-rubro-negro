@@ -12,9 +12,11 @@ public class Main {
         Jogo segundoJogo = new Jogo("Vasco", "11/11/2026", "21:30", "Maracanã");
         Usuario usuarioAtual = new Usuario(1, "Nicolas", LocalDate.of(2019, 10, 19), false);
         Presenca presencaAtual = null;
+        CheckInService checkInService = new CheckInService();
         List<Presenca> listaPresencas = new ArrayList<>();
         int checkIns = 0;
         boolean fezCheckIn = false;
+
 
         do {
             System.out.println("======Bem-vindo ao Check-in Rubro-Negro======");
@@ -51,13 +53,8 @@ public class Main {
                     if (jogoSelecionado == null) {
                         break;
                     }
-                    boolean jaFezCheckIn = false;
-                    for (Presenca presenca : listaPresencas) {
-                        if (presenca.getJogo().getAdversario().equals(jogoSelecionado.getAdversario()) && presenca.getJogo().getData().equals(jogoSelecionado.getData())) {
-                            jaFezCheckIn = true;
-                            break;
-                        }
-                    }
+                    boolean jaFezCheckIn = checkInService.jaFezCheckIn(listaPresencas, jogoSelecionado);
+
                     if (!jaFezCheckIn) {
                         checkIns++;
                         presencaAtual = new Presenca(usuarioAtual, jogoSelecionado);
