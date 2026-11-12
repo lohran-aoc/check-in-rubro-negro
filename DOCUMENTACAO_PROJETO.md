@@ -128,35 +128,35 @@ Partidas podem ter data, horário ou estádio alterados. O sistema deverá prese
 
 O perfil deverá mostrar o histórico completo, o tipo de cada presença e as insígnias conquistadas. Filtros por ano e indicação visual de jogos frequentados ou não são ideias de interface para etapas futuras.
 
-## 6. Estado atual do código (arquivos disponibilizados)
+## 6. Estado atual do código (verificado no GitHub em 11/11/2026)
 
-A análise abaixo corresponde aos arquivos `Main.java`, `Jogo.java` e `README.md` adicionados ao Projeto. **Os arquivos `Usuario.java` e `Presenca.java` não estavam entre os três arquivos disponibilizados nesta revisão**; suas implementações não foram verificadas diretamente.
+A implementação publicada em `src/` contém quatro classes: `Main`, `Jogo`, `Usuario` e `Presenca`. O protótipo é executado no console e guarda os registros somente em memória.
 
-### 6.1 Implementado ou observável
+### 6.1 Implementado
 
-| Recurso | Evidência / observação |
+| Recurso | Situação |
 |---|---|
-| Aplicação console | `Main.java` com `Scanner`, `do-while` e `switch`. |
-| Menu | Consultar jogo, fazer check-in, visualizar perfil e sair. |
-| Classe `Jogo` | Atributos privados `adversario`, `data`, `hora`, `estadio`; construtor; getters; `exibirInformacoes()`. |
-| Instâncias no `Main` | Um `Jogo` e um `Usuario` criados na inicialização. |
-| Registro simples de presença | `Presenca presencaAtual = null`, preenchida no primeiro check-in. |
-| Bloqueio simples de repetição | Se `presencaAtual` já existe, o menu impede novo registro nesse cenário de partida única. |
-| Perfil básico | Exibe nome, situação de sócio-torcedor, contador e dados da última presença. |
-| Persistência | Apenas em memória durante a execução; não há banco de dados nos arquivos analisados. |
+| Menu console | Consultar jogo, fazer check-in, visualizar perfil e sair |
+| Classes de domínio | `Usuario`, `Jogo` e `Presenca` |
+| Duas partidas | Estudiantes e Vasco, criadas como objetos `Jogo` |
+| Seleção de partida | O usuário escolhe em qual das duas partidas registrar presença |
+| Histórico em memória | `List<Presenca>` com `ArrayList<>` |
+| Prevenção de duplicidade | Percorre a lista e compara adversário e data da partida |
+| Opção de partida inválida | Interrompe o fluxo de check-in sem criar presença |
+| Perfil | Mostra nome, situação de sócio-torcedor, total e todas as partidas registradas |
+
+O autor executou testes manuais para seleção de partidas, tentativa de duplicidade, opção inválida e consulta de perfil.
 
 ### 6.2 Limitações atuais
 
-- O programa trabalha com **uma partida fixa** e uma referência de presença (`presencaAtual`).
-- O contador `checkIns` é mantido separadamente da presença.
-- Não há lista de partidas nem histórico com `ArrayList<Presenca>`.
-- Não há diferenciação implementada entre presença ao vivo e histórica.
-- Não há validação real de localização, janela de horário ou confirmação da partida.
-- Não há geração de insígnias, autenticação, API REST ou banco de dados.
-- `Jogo` ainda representa data e hora como `String`.
-- O menu utiliza entrada numérica direta; o tratamento de entradas inválidas ainda pode evoluir.
-
-> **Atenção:** a conclusão do curso de Listas e Coleções é um avanço de aprendizado, mas **não significa que `ArrayList` já tenha sido implementado no projeto**.
+- O programa mantém um único usuário e duas partidas fixas.
+- O registro é um **check-in simulado**; não há verificação de localização, janela de horário, status confirmado da partida ou encerramento real.
+- A comparação por adversário + data é didática, mas não substitui um identificador único e estável da partida.
+- `Jogo` armazena data e hora como `String`.
+- `checkIns` duplica uma contagem que pode ser obtida com `listaPresencas.size()`; a variável `fezCheckIn` está declarada, mas não é usada.
+- `Scanner.nextInt()` ainda pode falhar quando o usuário digita letras ou outros valores não numéricos.
+- Não há persistência, autenticação, insígnias, registros históricos diferenciados, testes automatizados, API REST ou banco de dados.
+- O `Main` ainda concentra interação com o usuário e regras de negócio; a extração de responsabilidades será trabalhada no Desafio 8.
 
 ## 7. Modelagem inicial e decisões técnicas
 
@@ -181,8 +181,8 @@ No exercício inicial, comparar **adversário + data** é suficiente para aprend
 
 ### 7.4 Coleções e tipos de presença
 
-- Próxima evolução: `ArrayList<Presenca>` para armazenar várias presenças.
-- `for-each` permitirá percorrer os registros e verificar duplicidade.
+- **Implementado:** `ArrayList<Presenca>` armazena várias presenças em memória.
+- **Implementado:** `for-each` percorre os registros e verifica duplicidade por adversário e data.
 - Um `enum` como `TipoPresenca` (`AO_VIVO`, `HISTORICA`) é uma **proposta de modelagem**, ainda não implementada.
 - `instanceof` não é necessário apenas para diferenciar esses tipos de registro.
 
@@ -191,7 +191,7 @@ No exercício inicial, comparar **adversário + data** é suficiente para aprend
 | Etapa | Entrega esperada | Situação |
 |---|---|---|
 | **0 — Fundamentos Java/POO** | Classes, construtores, getters, menu e check-in simulado | **Base existente** |
-| **1 — Collections** | Várias partidas, `ArrayList<Presenca>`, histórico e prevenção de duplicidade por partida | **Próxima etapa** |
+| **1 — Collections** | Duas partidas, `ArrayList<Presenca>`, histórico e prevenção de duplicidade por partida | **Concluída no protótipo (Desafio 7.6)** |
 | **2 — Regras de domínio** | Tipos de presença, estados de jogo, validação de datas/horários e elegibilidade de insígnias | Planejada |
 | **3 — Qualidade** | Tratamento de erros, organização de responsabilidades e testes com JUnit | Planejada |
 | **4 — Persistência** | Modelagem relacional, SQL e PostgreSQL | Planejada |
@@ -203,16 +203,16 @@ No exercício inicial, comparar **adversário + data** é suficiente para aprend
 
 A ordem entre testes, banco de dados e API poderá ser ajustada conforme o aprendizado; não é necessário concluir um curso inteiro antes de aplicar cada conceito.
 
-### Próximo desafio Java — 7.1
+### Próximo desafio Java — 8
 
-Criar uma lista vazia `ArrayList<Presenca>` no `Main`, **sem remover imediatamente** `presencaAtual`, para não quebrar as referências existentes. Depois adaptar o registro e a consulta do perfil em passos pequenos.
+Separar gradualmente as responsabilidades de interação com o usuário e as regras de check-in, começando por identificar o que deve permanecer no `Main` e o que pode migrar para uma classe de serviço. Preservar os comportamentos já testados.
 
 ## 9. Tecnologias
 
 | Área | Situação |
 |---|---|
 | Java e POO | Utilizados no protótipo console |
-| Collections / `ArrayList` | Curso concluído; aplicação no projeto pendente |
+| Collections / `ArrayList` | Implementadas no histórico e na prevenção de duplicidades do protótipo |
 | JUnit | Planejado |
 | SQL / PostgreSQL | Planejado |
 | Spring Boot / REST | Planejado |
@@ -251,13 +251,13 @@ Criar uma lista vazia `ArrayList<Presenca>` no `Main`, **sem remover imediatamen
 
 ### Checkpoint de aprendizado
 
-Antes do Desafio 7.1, conferir se consegue explicar a diferença entre **check-in ao vivo**, **registro histórico** e **presença verificada oficialmente**, além de identificar quais dessas funcionalidades já existem no código.
+Antes do Desafio 8, explicar a diferença entre **check-in ao vivo**, **registro histórico** e **presença verificada oficialmente**, identificar as responsabilidades atuais do `Main` e confirmar que o check-in simulado para duas partidas continua funcionando.
 
 ### Commit sugerido
 
 ```bash
-git add DOCUMENTACAO_PROJETO.md
-git commit -m "docs: adiciona documentação oficial e regras de negócio"
+git add README.md DOCUMENTACAO_PROJETO.md
+git commit -m "docs: atualiza documentacao com progresso do prototipo"
 ```
 
 ---
