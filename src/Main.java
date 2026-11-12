@@ -53,7 +53,6 @@ public class Main {
                         break;
                     }
 
-                    boolean jaFezCheckIn = checkInService.jaFezCheckIn(listaPresencas, jogoSelecionado);
                     boolean checkInRealizado = checkInService.realizarCheckIn(usuarioAtual, jogoSelecionado, listaPresencas);
 
                     if (checkInRealizado) {
