@@ -27,8 +27,17 @@ O projeto está sendo construído como parte do meu aprendizado. **Já funciona 
 ## 🗺️ Roadmap
 
 - [x] **Fase 1 — Núcleo Java:** classes `Usuario`, `Jogo` e `Presenca`; menu no console, check-in simulado, seleção entre duas partidas e perfil com histórico em memória.
-- [ ] **Fase 2 — Regras de negócio:** prevenção de duplicidades por adversário + data **já implementada no protótipo**; ainda faltam identificação estável de partidas, validações de datas e horários, proximidade do estádio, tipos de presença e insígnias. Rankings são uma possibilidade futura.
-- [ ] **Fase 3 — Qualidade e testes:** organizar responsabilidades, tratar entradas inválidas, escrever testes automatizados e documentar decisões técnicas.
+- [ ] **Fase 2 — Regras de negócio:** ampliar as validações do check-in.
+  - [x] Impedir check-in duplicado por adversário e data no protótipo.
+  - [ ] Identificar cada partida de forma única e estável.
+  - [ ] Validar partida confirmada, janela de horário e proximidade do estádio.
+  - [ ] Diferenciar registros históricos de check-ins ao vivo e implementar insígnias. Rankings são uma possibilidade futura.
+- [ ] **Fase 3 — Qualidade e testes:** melhorar a organização e a confiabilidade do código.
+  - [x] Separar verificação de duplicidade e registro de presença na `CheckInService`.
+  - [x] Eliminar o contador redundante de check-ins e usar `listaPresencas.size()`.
+  - [x] Testar manualmente registros em duas partidas, duplicidades e histórico.
+  - [ ] Tratar entradas inválidas sem interromper inesperadamente o programa.
+  - [ ] Criar testes automatizados e continuar a documentação das decisões técnicas.
 - [ ] **Fase 4 — Backend:** desenvolver uma API REST com Spring Boot, persistência em PostgreSQL e documentação com OpenAPI/Swagger.
 - [ ] **Fase 5 — Interface web:** criar telas para jogos, perfil, histórico e check-in, integrando a interface ao backend.
 - [ ] **Fase 6 — Publicação e portfólio:** realizar o deploy, gravar uma demonstração e documentar a arquitetura e as funcionalidades concluídas.
@@ -65,10 +74,11 @@ check-in-rubro-negro/
     ├── Main.java
     ├── Jogo.java
     ├── Usuario.java
-    └── Presenca.java
+    ├── Presenca.java
+    └── CheckInService.java
 ```
 
-Ainda não há pacotes Java, Maven ou `CheckInService` no repositório. A separação de responsabilidades e a organização em pacotes são evoluções planejadas.
+A classe `CheckInService` já concentra a verificação de duplicidades e o registro de presenças. Ainda não há pacotes Java ou Maven; a organização em pacotes e outras melhorias estruturais são evoluções planejadas.
 
 ## ▶️ Como executar
 
