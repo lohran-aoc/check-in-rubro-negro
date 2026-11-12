@@ -14,7 +14,6 @@ public class Main {
         Presenca presencaAtual = null;
         CheckInService checkInService = new CheckInService();
         List<Presenca> listaPresencas = new ArrayList<>();
-        int checkIns = 0;
         boolean fezCheckIn = false;
 
 
@@ -56,14 +55,13 @@ public class Main {
                     boolean jaFezCheckIn = checkInService.jaFezCheckIn(listaPresencas, jogoSelecionado);
 
                     if (!jaFezCheckIn) {
-                        checkIns++;
                         presencaAtual = new Presenca(usuarioAtual, jogoSelecionado);
                         listaPresencas.add(presencaAtual);
                         System.out.println("Você fez o check-in.");
                     } else {
                         System.out.println("Você já fez o check-in para essa partida!");
                     }
-                    System.out.println("Você já fez " + checkIns + " check-in(s).");
+                    System.out.println("Você já fez " + listaPresencas.size() + " check-in(s).");
                     break;
                 case 3:
                     System.out.println("========== PERFIL RUBRO-NEGRO ==========");
@@ -73,7 +71,7 @@ public class Main {
                     } else {
                         System.out.println("Que tal aderir a um plano de sócio-torcedor?");
                     }
-                    System.out.println("Total de check-ins: " + checkIns);
+                    System.out.println("Total de check-ins: " + listaPresencas.size());
                     System.out.println(" ");
                     if (!listaPresencas.isEmpty()) {
                         System.out.println("----------------------------");
