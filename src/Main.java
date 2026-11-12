@@ -52,11 +52,11 @@ public class Main {
                     if (jogoSelecionado == null) {
                         break;
                     }
-                    boolean jaFezCheckIn = checkInService.jaFezCheckIn(listaPresencas, jogoSelecionado);
 
-                    if (!jaFezCheckIn) {
-                        presencaAtual = new Presenca(usuarioAtual, jogoSelecionado);
-                        listaPresencas.add(presencaAtual);
+                    boolean jaFezCheckIn = checkInService.jaFezCheckIn(listaPresencas, jogoSelecionado);
+                    boolean checkInRealizado = checkInService.realizarCheckIn(usuarioAtual, jogoSelecionado, listaPresencas);
+
+                    if (checkInRealizado) {
                         System.out.println("Você fez o check-in.");
                     } else {
                         System.out.println("Você já fez o check-in para essa partida!");

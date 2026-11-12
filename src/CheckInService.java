@@ -9,4 +9,13 @@ public class CheckInService {
         }
         return false;
     }
+
+    public boolean realizarCheckIn(Usuario usuarioAtual, Jogo jogoSelecionado, List<Presenca> listaPresencas) {
+        if(jaFezCheckIn(listaPresencas, jogoSelecionado)) {
+            return false;
+        }
+        Presenca presenca = new Presenca(usuarioAtual, jogoSelecionado);
+        listaPresencas.add(presenca);
+        return true;
+    }
 }
