@@ -22,12 +22,12 @@ A ideia será desenvolvida por etapas, começando por uma aplicação simples ex
 
 **Em desenvolvimento — etapa inicial em Java.**
 
-O projeto está sendo construído como parte do meu aprendizado. As funcionalidades descritas representam objetivos do roadmap e não significam que já estejam implementadas.
+O projeto está sendo construído como parte do meu aprendizado. **Já funciona no console:** consultar uma partida, selecionar entre dois jogos para check-in simulado, bloquear check-in repetido para a mesma combinação de adversário e data e visualizar o histórico em memória. O sistema ainda não valida horário, localização ou confirmação da partida; não persiste dados após encerrar. As demais funcionalidades descritas são objetivos futuros.
 
 ## 🗺️ Roadmap
 
-- [ ] **Fase 1 — Núcleo Java:** criar as classes `Usuario`, `Jogo` e `Presenca`; implementar menu no console, cadastro em memória, check-in simulado e perfil do torcedor.
-- [ ] **Fase 2 — Regras de negócio:** impedir check-ins duplicados, validar datas e horários, calcular distâncias com a fórmula de Haversine e implementar insígnias e ranking.
+- [x] **Fase 1 — Núcleo Java:** classes `Usuario`, `Jogo` e `Presenca`; menu no console, check-in simulado, seleção entre duas partidas e perfil com histórico em memória.
+- [ ] **Fase 2 — Regras de negócio:** prevenção de duplicidades por adversário + data **já implementada no protótipo**; ainda faltam identificação estável de partidas, validações de datas e horários, proximidade do estádio, tipos de presença e insígnias. Rankings são uma possibilidade futura.
 - [ ] **Fase 3 — Qualidade e testes:** organizar responsabilidades, tratar entradas inválidas, escrever testes automatizados e documentar decisões técnicas.
 - [ ] **Fase 4 — Backend:** desenvolver uma API REST com Spring Boot, persistência em PostgreSQL e documentação com OpenAPI/Swagger.
 - [ ] **Fase 5 — Interface web:** criar telas para jogos, perfil, histórico e check-in, integrando a interface ao backend.
@@ -54,26 +54,21 @@ As tecnologias serão introduzidas conforme forem necessárias, evitando complex
 
 ## 🧱 Organização do código
 
-A estrutura inicial prevista para o núcleo Java é:
+A estrutura **atualmente publicada** é:
 
 ```text
-checkin-nucleo/
+check-in-rubro-negro/
+├── README.md
+├── DOCUMENTACAO_PROJETO.md
+├── .gitignore
 └── src/
-    └── main/
-        └── java/
-            └── com/
-                └── rubronegro/
-                    └── checkin/
-                        ├── Main.java
-                        ├── model/
-                        │   ├── Usuario.java
-                        │   ├── Jogo.java
-                        │   └── Presenca.java
-                        └── service/
-                            └── CheckInService.java
+    ├── Main.java
+    ├── Jogo.java
+    ├── Usuario.java
+    └── Presenca.java
 ```
 
-Essa estrutura é uma proposta inicial e poderá evoluir à medida que novas funcionalidades forem implementadas.
+Ainda não há pacotes Java, Maven ou `CheckInService` no repositório. A separação de responsabilidades e a organização em pacotes são evoluções planejadas.
 
 ## ▶️ Como executar
 
@@ -89,6 +84,8 @@ Essa estrutura é uma proposta inicial e poderá evoluir à medida que novas fun
 3. Execute a classe `Main`.
 
 > As instruções poderão mudar quando o projeto passar a utilizar Maven, banco de dados e Spring Boot.
+
+Para conhecer as regras de negócio, decisões e etapas do desenvolvimento, consulte a [documentação detalhada](DOCUMENTACAO_PROJETO.md).
 
 ## ⚠️ Limitações e decisões técnicas
 
