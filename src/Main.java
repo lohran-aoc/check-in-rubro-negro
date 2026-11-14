@@ -4,18 +4,28 @@ import java.util.List;
 import java.util.Scanner;
 
 public class Main {
+    private static int lerInteiro(Scanner leitura) {
+        while (!leitura.hasNextInt()) {
+            System.out.println("Entrada inválida!");
+            leitura.nextLine();
+        }
+
+        return leitura.nextInt();
+    }
+
     public static void main(String[] args) {
         Scanner leitura = new Scanner(System.in);
-        int opcao;
-        int opcaoJogo;
+
         Jogo proximoJogo = new Jogo("Estudiantes", "15/10/2026", "21:30", "UNO");
         Jogo segundoJogo = new Jogo("Vasco", "11/11/2026", "21:30", "Maracanã");
+
         Usuario usuarioAtual = new Usuario(1, "Nicolas", LocalDate.of(2019, 10, 19), false);
-        Presenca presencaAtual = null;
+
         CheckInService checkInService = new CheckInService();
         List<Presenca> listaPresencas = new ArrayList<>();
-        boolean fezCheckIn = false;
 
+        int opcao;
+        int opcaoJogo;
 
         do {
             System.out.println("======Bem-vindo ao Check-in Rubro-Negro======");
@@ -25,7 +35,7 @@ public class Main {
             System.out.println("2. Fazer check-in");
             System.out.println("3. Visualizar perfil");
             System.out.println("4. Sair");
-            opcao = leitura.nextInt();
+            opcao = lerInteiro(leitura);
 
             switch (opcao) {
                 case 1:
@@ -36,7 +46,7 @@ public class Main {
                     System.out.println("Em qual jogo você quer fazer check-in?");
                     System.out.println("1: " + proximoJogo.getAdversario());
                     System.out.println("2: " + segundoJogo.getAdversario());
-                    opcaoJogo = leitura.nextInt();
+                    opcaoJogo = lerInteiro(leitura);
 
                     switch (opcaoJogo) {
                         case 1:
@@ -47,8 +57,8 @@ public class Main {
                             break;
                         default:
                             System.out.println("Opção de jogo inválida!");
-                            break;
                     }
+
                     if (jogoSelecionado == null) {
                         break;
                     }
@@ -65,7 +75,7 @@ public class Main {
                 case 3:
                     System.out.println("========== PERFIL RUBRO-NEGRO ==========");
                     System.out.println("Bem-vindo " + usuarioAtual.getNome());
-                    if(usuarioAtual.isSocioTorcedor()) {
+                    if (usuarioAtual.isSocioTorcedor()) {
                         System.out.println("Você é sócio torcedor!");
                     } else {
                         System.out.println("Que tal aderir a um plano de sócio-torcedor?");
